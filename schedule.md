@@ -57,15 +57,15 @@ Heroku
 - Sudoku solver
 
 #Weeks
-1 Core 1-5
-2 Core 6-10 (Adventure game) (or something different)
-3 Intro to Node, Testing, modules (Sudoku Solver)
-4 DOM, jQuery, REST, AJAX, APIs, client-side testing
-5 Express, Servers, CURL, Routes, Jade, testing routes (Static site generator)
-6 Backbone, testing backbone
-7 Persistence & databases; auth & sessions
-8
-9 Capstone
-10 Capstone
-11 Capstone
-12 Capstone
+1. Core 1-5
+2. Core 6-10 (Adventure game) (or something different)
+3. Intro to Node, Testing, modules (Sudoku Solver)
+4. DOM, jQuery, REST, AJAX, APIs, client-side testing
+5. Express, Servers, CURL, Routes, Jade, testing routes (Static site generator)
+6. Backbone, testing backbone
+7. Persistence & databases; auth & sessions
+8.
+9. Capstone
+10. Capstone
+11. Capstone
+12. Capstone
