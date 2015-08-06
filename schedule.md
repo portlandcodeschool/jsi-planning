@@ -1,8 +1,3 @@
-#Projects
-- Adventure Game (User Input & Serialization, Fixing Issues, Objects: Methods & Inheritance)
-- Static Site Generator (Mini Project 1 & 2)
-- Sudoku solver
-
 #Weeks
 
 The general pattern is to have a mini-project for each week that requires all of the topics being taught in that week to complete. My initial thought is to start with a description of what the finished project should do (as disctinct from _how_ it does it), then an outline of what we already know about how to accomplish that, and then start the day's instruction with stuff that will supply one missing piece.
@@ -27,6 +22,10 @@ before we even get to the JavaScript:
   - the Node REPL
   - the browser console
 
+Exercises include:
+
+  - TBD
+
 **Tuesday** will focus on more basics, and will also introduce Git and the basics of a Git workflow. The actual installation of Git can wait until the end of class, so that people aren't waiting for downloads and compiles when they could be learning to code. Topics include:
 
   - || and &&
@@ -35,6 +34,10 @@ before we even get to the JavaScript:
   - debugging with `console.log`
   - blocks and loops
   - git
+
+Exercises include:
+
+  - TBD
 
 **Wednesday** Introduces the concept of functions, and also array basics:
 
@@ -81,6 +84,10 @@ This week is all about objects, with a little bit of closures and IIFEs thrown i
   - [] vs dot-notation, reference chains
   - Objects: incremental creation, literal notation, and nesting
 
+Exercises include:
+
+  - TBD
+
 **Tuesday** gets more into how objects are used and what they do:
 
   - Example roles of objects
@@ -90,6 +97,10 @@ This week is all about objects, with a little bit of closures and IIFEs thrown i
   - Object linking & sharing, shallow copy & compare, null, reference arguments
   - references
 
+Exercises include:
+
+  - TBD
+
 **Wednesday** begins to get back into functions, and also talks about global objects and properties:
 
   - global vars vs. properties
@@ -98,15 +109,27 @@ This week is all about objects, with a little bit of closures and IIFEs thrown i
   - scoping
   - functions as objects
 
+Exercises include:
+
+  - TBD
+
 **Thursday** is factory functions:
 
   - duplicate vs. shared methods
   - factory functions
 
+Exercises include:
+
+  - TBD
+
 **Friday** comes back around to closures:
 
   - private variables & functions
   - closures & access control
+
+Exercises include:
+
+  - TBD
 
 ##Week 3
 
@@ -127,13 +150,25 @@ After the break, we come back and dive into the back end: Express, servers, curl
 
 All Backbone, all the time.
 
+Exercises include:
+
+  - TBD
+
 ##Week 8
 
 Things we need to remember! This week is persistence, databases (Orchestrate and Postgres), authorization, and sessions. Exercise TBD.
 
+Exercises include:
+
+  - TBD
+
 ##Week 9
 
 Random bits and pieces go here: security, DNS, Heroku, and so on.
+
+Exercises include:
+
+  - TBD
 
 ##Weeks 10-13
 
