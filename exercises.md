@@ -2,8 +2,12 @@
 
 This will be a short day, given that the first half of it will be at Laurelhurst Park, and at least an hour of the second half will be given over to admin stuff and getting-to-know-you activities.
 
-- [Homework 1](https://github.com/portlandcodeschool/jse-fall15-1), number 1: The list of all the expressions to evaluate. This would be good pair work as people try to figure out all the edge cases.
+- [Homework 1](https://github.com/portlandcodeschool/jse-fall15-1), number 1: The list of all the expressions to evaluate. This would be good pair work as people try to figure out all the edge cases.  (Part q needs omitting/modifying to avoid ||)
 - Potentially one other problem from Homework 1, depending on how far people get. The mean of numbers is a pretty good candidate.
+  - #2 (mean of numbers)
+  - #3 (rectangles; modify 3c to avoid conditional)
+  - #5 (converting improper fractions)
+
 
 #Tuesday 8/11
 
