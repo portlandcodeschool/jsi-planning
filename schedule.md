@@ -22,6 +22,7 @@ before we even get to the JavaScript:
   - assignment, equality, and identity
   - boolean values and operators
   - concatenation, & autoconversion
+  - Be the Interpreter 1: tracking variables, parsing expressions
 
 Exercises include:
 
@@ -39,6 +40,7 @@ Exercises include:
   - while loops
   - for loops
   - debugging with `console.log`
+  - Be the Interpreter 2: branching
   - git
 
 Exercises include:
@@ -48,10 +50,13 @@ Exercises include:
 
 **Wednesday** Introduces the concept of functions, and also array basics:
 
+  - arrays as a container of stuff (no methods yet; that's tomorrow)
+      array[i]
+      array.length
   - CAPSTONE EVENT (11-1)
   - Function basics: parameters vs. arguments, return values, and definition vs. call
   - local vars, hoisting, scope, and shadowing
-  - arrays as a container of stuff (no methods yet; that's tomorrow)
+  - Be the Interpreter 3: calling functions, tracking scope, return values
 
 Exercises for the day include:
 
@@ -65,7 +70,14 @@ Exercises for the day include:
 
   - basic assertions
   - defensive programming & parameter checks
-  - Intro to string & array methods
+  - fundamentals of testing
+    - write sample test functions (home-baked, non-Mocha)
+  - Super Awesome Homework Tester site
+
+
+  - Intro to string & array methods:
+    string.split
+    array.join, push, pop, concat
 
 Exercises for the day include:
 
@@ -84,6 +96,7 @@ Exercises for the day include:
 Exercises for the day include:
 
   - Write your own version of forEach/map/etc.
+  - Rewrite some earlier loop exercises with map/forEach
 
 ## Week 2
 
