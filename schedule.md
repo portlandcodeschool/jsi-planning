@@ -14,41 +14,52 @@ This is Core JavaScript. The vast majority of the topics here will come fromthe 
 
 before we even get to the JavaScript:
 
-  - primitives, concatenation, & autoconversion
-  - booleans
-  - assignment, equality, and identity
-  - variables
-  - operators,expressions, & statements
   - the Node REPL
   - the browser console
+  - operators, expressions, & statements
+  - variables
+  - primitive types, typeof
+  - assignment, equality, and identity
+  - boolean values and operators
+  - concatenation, & autoconversion
 
 Exercises include:
 
-  - TBD
+  - JSE-HW1 problems:
+    - #1 (except q)
+    - #2-3 (modify 3c to avoid conditional)
+    - #5
 
 **Tuesday** will focus on more basics, and will also introduce Git and the basics of a Git workflow. The actual installation of Git can wait until the end of class, so that people aren't waiting for downloads and compiles when they could be learning to code. Topics include:
 
-  - || and &&
-  - truthiness
   - conditionals and branching
+  - truthiness
+  - || and &&
+  - blocks
+  - while loops
+  - for loops
   - debugging with `console.log`
-  - blocks and loops
   - git
 
 Exercises include:
 
-  - TBD
+  - JSE-HW1, #4 (checkerboard)
+  - JSE-HW2, #2 (simplify loops)
 
 **Wednesday** Introduces the concept of functions, and also array basics:
 
+  - CAPSTONE EVENT (11-1)
   - Function basics: parameters vs. arguments, return values, and definition vs. call
   - local vars, hoisting, scope, and shadowing
   - arrays as a container of stuff (no methods yet; that's tomorrow)
 
 Exercises for the day include:
 
-  - The 12 Days of Christmas (nested loops)
-  - The initial version of the Cards problem
+  - JSE-HW2 problems:
+    - #1 (proper-fraction function)
+    - #3 (The 12 Days of Christmas: nested loops with arrays)
+    - #4 (&& simulator)
+    - #5a (The initial version of the Cards problem: global functions
 
 **Thursday** is focused mostly on making sure your code works right, but also introduces methods for the first time:
 
@@ -58,11 +69,12 @@ Exercises for the day include:
 
 Exercises for the day include:
 
-  - defensive cards
+  - JSE-HW2, #5b,c (defensive cards and assertion/testing)
 
 **Friday** is all about higher-order functions--specifically, functions that take other functions as arguments:
 
-  - anonymous functions
+  - callbacks (functions as cargo)
+  - anonymous inline functions
   - forEach
   - map
   - filter
@@ -79,10 +91,10 @@ This week is all about objects, with a little bit of closures and IIFEs thrown i
 
 **Monday** covers what objects are and how properties work:
 
-  - properties vs. variables
-  - property creation, deletion, and enumeration
-  - [] vs dot-notation, reference chains
   - Objects: incremental creation, literal notation, and nesting
+  - property creation, deletion, and enumeration
+  - properties vs. variables
+  - [] vs dot-notation, reference chains
 
 Exercises include:
 
@@ -90,12 +102,19 @@ Exercises include:
 
 **Tuesday** gets more into how objects are used and what they do:
 
-  - Example roles of objects
-  - custom methods, `this`, and dynamic scoping
-  - string methods & string wrapper objects
+  - References & Implications:
+    - null vs. {}
+    - object equality and identity
+    - shallow copy and compare
+    - assignment and aliasing
+    - nesting, linking, and sharing
+    - circular linking
+    - deleting references
+    - reference arguments
   - arrays as objects & array methods
-  - Object linking & sharing, shallow copy & compare, null, reference arguments
-  - references
+  - string wrapper objects and methods
+  - custom methods, `this`, and dynamic scoping
+  - Example roles of objects: dictionary, toolkit
 
 Exercises include:
 
@@ -113,7 +132,7 @@ Exercises include:
 
   - TBD
 
-**Thursday** is factory functions:
+**Thursday** is factory functions: (TechFestNW?)
 
   - duplicate vs. shared methods
   - factory functions
@@ -122,7 +141,7 @@ Exercises include:
 
   - TBD
 
-**Friday** comes back around to closures:
+**Friday** comes back around to closures: (TechFestNW?)
 
   - private variables & functions
   - closures & access control
