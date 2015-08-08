@@ -60,7 +60,11 @@ var nums = [3, 1, 4, 1, 5, 9, 2, 7];
 3. Write a loop to duplicate `nums`, copying each element of `nums` into a different array.
 
 
+## Intermission: Capstone Fair!
 
+---
+
+# Afternoon
 
 ## Fun with Functions
 
@@ -72,6 +76,7 @@ var nums = [3, 1, 4, 1, 5, 9, 2, 7];
 
 4.  Use your three functions together to print the word for the square of the mean of these numbers: [2,4,7,-1]
 
+<!-- POSTPONE until 08-functions2?
 ## Still More Fun
 
 Examine the following code and execute it by hand.
@@ -93,6 +98,14 @@ console.log(thing(mult,2,3));
 ```
 
 Explain in words what this program does.
+
+-->
+
+
+## Playing Cards, version 1
+
+
+## Days of Xmas
 
 
 ## Summary
