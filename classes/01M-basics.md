@@ -112,6 +112,93 @@ z = "" + x;
 console.log(z + z);
 ```
 
+### More Practice: Expressions with Unknown values
+
+Predict the output of each of the following expressions, and explain the rules which determine that answer.  (_Hint: The rules for operator `==` are complicated, but do your best!_)
+
+If the output depends on the value or type of variable `x`, identify the conditions (what `x` is) when the expression will output true (or false, if that's simpler).  Assume the cases are independent, and `x` is reset to an unknown value before each.
+Just because `x` is unknown, don't assume that it equals `undefined`!  You should consider the expression's behavior _for any possible value of `x`._
+
+Some of these are tricky!  Don't trust your first instinct.  
+
+
+1. `"1" == 1`
+
+2. `"1" === 1`
+
+3. `x == 'x'`
+
+4. `x == (x+'')`
+
+5. `'' == ' '`
+
+6. `x = true`
+
+7. `var x; x == 'undefined'`
+
+8. `'9'<'10'`
+
+9. `typeof x + 1 === "number"`
+
+10. `typeof x % 2 === "number"`
+
+11. `typeof (x % 2) === "number"`
+
+12. `x++ == ++x`
+
+13. `++x == x++`
+
+14. `"1"+x == 1+x`
+
+15. `"0"+1 == 1`
+
+16. `(typeof (x+1))===(typeof x)`	
+
+17. `(x=(typeof (x+(typeof x))))==x`
+
+
+### Fractional Improvement
+
+Suppose you represent a fraction (_n/d_) with 2 integer variables: _n_ for the numerator and _d_ for the denominator.
+If _n_ is greater than _d_, the fraction is "improper", but it can be rewritten as a proper fraction.  For example, "7/4" is improper, but it can be rewritten as "1 3/4", which is proper.
+
+Assuming variables _n_ and _d_ are defined in advance (but you don't know their values), write a series of expressions to generate a string expressing the proper form of the fraction _n/d_.  For example, when _n===7_ and _d===4_, your resulting string should be "1 3/4".  You may assume both _n_ and _d_ are positive integers and _n_ > _d_, but otherwise you should be able to handle any values of _n_ and _d_.
+
+1. Solve it first by making use of a function called _Math.floor_.
+
+2. Now solve it without calling any functions, using merely operators.  (Hint: you'll need at least the modulo operator _%_.)
+
+### Kinda Mean Numbers
+
+Assume variables x, y, and z are numbers.
+
+1. Write an expression for the mean (i.e. average) of x, y, and z.
+
+2. Write a series of expressions to adjust each of x, y, and z halfway toward the mean of the three.
+That is, reset the value of each variable to something new based on its previous value.
+
+
+### Simple Geometry
+
+Suppose you're encoding geometric shapes in a Cartesian (2D) coordinate system, and you represent a rectangle with four numeric variables:
+
+- _l_ : horizontal position of left edge (relative to some origin);
+- _r_ : horizontal position of right edge;
+- _t_ : vertical position of top edge;
+- _b_ : vertical position of bottom edge.
+
+1. Write an expression for the rectangle's area.
+
+2. Write an expression which is true if the rectangle is taller than it is wide, and false otherwise.
+
+3. Write an expression for the circumference of the biggest circle which can fit inside the rectangle.  (_Hint: make use of the functions `Math.max()` and `Math.min()`._)
+
+4. Write an expression for the area of the smallest circle which completely encloses (i.e. circumscribes) the rectangle.
+
+5. Imagine subdividing your rectangle into 3 equal rows and 3 equal columns, which would create 9 smaller rectangles, identical in shape but varying by position.
+Define four new variables describing the centermost small rectangle.
+(_Hint: one of the many solutions is very similar to the solution of "Kinda Mean #2" above._)
+
 
 ####Summary
 
@@ -121,9 +208,11 @@ Write down, individually, your own summary of the following ideas:
 -   server vs. client code
 -   what a programming language does
 -	what an operator does
+-	how nested operators work
 -   expressions vs. statements
--   what a "type" is in programming
 -   what variables are
+-   what a "type" is in programming
 -   type coercions
+-	how string concatenation works
 
 Then share them with the rest of your group and discuss your answers.
