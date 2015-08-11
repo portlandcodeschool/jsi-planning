@@ -1,0 +1,63 @@
+- Welcome to Immersion
+  - teacher intros
+  - name game
+  - demographics: OS? Coding experience?
+  - Structure of the class
+    - Subjects covered
+      - Core JS
+      - Node
+      - Front end
+      - back end/servers
+      - backbone
+      - databases
+    - 8 weeks of class, 4 weeks of capstone
+      - capstone projects for previous class on Wednesday
+      - quick description of capstone projects
+    - most weeks will have mini-projects for the week
+      - small group projects (pairs?)
+      - will involve both the materials for the current week and some from past weeks
+      - should use Git and ticketing to organize projects
+      - more details on that after the first two weeks!
+    - most days will be some lecture in the morning and in-class work in the afternoon, though that's just a guideline
+  - how to succeed
+    - ask lots of questions
+    - work with each other
+    - take advantage of TAs and instructors
+    - don't be afraid to experiment--JS as investigative science!
+    - keep an eye on Slack! It's the primary communication channel
+  - reources
+    - The site
+    - Treehouse
+    - Slack
+      - collect emails, send invites on break
+    - MDN
+    - meetups: Hack & Help, Node meetup, etc
+  - Tools
+    - Text editors of choice
+    - Access to the console
+    - A good browser
+    - Node
+      - https://nodejs.org/download/
+      -Linux: `sudo apt-get install nodejs`
+        - ``sudo ln -s `which nodejs` /usr/bin/node`` 
+- Time for some JavaScript!
+  - places to evaluate your code: browser console & node REPL
+  - Operators
+    - Start with math
+      - unary, binary, prefix, postfix
+    - Boolean operators ( <, >, ==, ===, etc)
+    - typeof
+    - Invent an Operator!
+  - Expressions and Statements
+    - Expressions evaluate to a value
+    - Statements do a thing (if, for, etc)
+      - More statements tomorrow and thereafter; for now, it's just `var` and `function func() {...}`
+  - variables
+    - Evaluating nested expressions
+  - types and the typeof operator
+    - Experimenting with Arithmetic
+  - string concatenation
+  - autoconversion
+  - fun with strings and conversions
+  - Be the Interpreter
+  - Exercises
