@@ -53,7 +53,7 @@ Given the following array definition:
 var nums = [3, 1, 4, 1, 5, 9, 2, 7];
 ```
 
-1. Write a loop to console.log all the elements of `nums`.
+1. Write a loop to console.log each element of `nums`.
 
 2. Write a loop to change `nums` so that each of its elements is doubled.
 
@@ -65,6 +65,15 @@ var nums = [3, 1, 4, 1, 5, 9, 2, 7];
 ---
 
 # Afternoon
+
+## Function Basics
+
+Write a function to print "hello world!" to the console.
+
+1.  First write it in the form of a function declaration.
+
+2.  Then write it in the form of a function expression assigned to a variable.
+
 
 ## Fun with Functions
 
@@ -101,11 +110,55 @@ Explain in words what this program does.
 
 -->
 
+## Letter Pyramid
 
-## Playing Cards, version 1
+Yesterday you wrote some loops to generate a pyramid of numbers.
+Now modify that code into a function which generates a pyramid of letters like this:
+```
+a
+ba
+cba
+dcba
+edcba
+```
 
+Your function should have a parameter controlling the size of the pyramid and return a string.
+Don't just `console.log()` each line;  instead return all the lines together in a single string which includes a '\n' at each line break.  Use an array to store one copy of each letter, then insert copies into your output string as needed.
 
-## Days of Xmas
+## Song Lyrics
+
+Adapting your letter-pyramid solution above, write a function which returns a string containing the entire lyrics for the song "The Twelve Days of Christmas".  Make sure that your result is grammatically and typographically correct (include line breaks, commas, etc. where needed), but keep redundancy within your program to a minimum.  Don't just `console.log()` each line; return them together as a single string which includes a '\n' at each line break.
+You may want to use helper functions, loops, and/or arrays to store repeated elements.
+
+If you prefer a non-Christmas option, you may choose a different song with similarly repeating structure, such as "There was an Old Woman Who Swallowed a Fly".  If you prefer a vegan option, you may write your own cruelty-free song.
+
+## Playing Cards, Episode 1
+
+Imagine that a deck of playing cards is sorted by rank and suit: first all the Aces, then the Twos, etc, with the Kings last.  Within each rank, the suits are in the order Hearts, Diamonds, Spades, Clubs.  Number each card in order from 0 to 51 (i.e. 0=Ace of Hearts; 1=Ace of Diamonds; 51=King of Clubs), and let that ID number represent the corresponding card.  Use this encoding scheme throughout the challenge below.
+
+Write five related functions to compute different aspects of a card:
+
+* `rank(id)` returns 1-13, representing the card's rank (for an _id_ between 0-51).
+
+* `suit(id)` returns 1-4, representing the card's suit (1 is Hearts, 4 is Clubs).
+
+* `color(id)` returns "red" or "black".
+
+* `name(id)` returns the full name of the card (e.g. "Four of Diamonds").
+
+* `cardID(rank,suit)` returns 0-51, identifying the card id of a given rank and suit.
+
+You may assume each function will be called with valid arguments (i.e. integers in the appropriate range).
+
+Your functions may call each other to avoid duplicating code -- for example: _color_ could be derived from _suit_.
+
+**Hint #1:** Notice the patterns as the card id ranges from 0 to 51:
+
+- rank(id) increases slowly, like a quotient;
+- suit(id) cycles quickly through 1-4, (almost) like a remainder;
+- color(id) alternates _R,R,B,B,R,R,B,B..._
+
+**Hint #2:** Generate your card names by combining a rank word from one array and suit word from another.
 
 
 ## Summary
@@ -113,6 +166,7 @@ Explain in words what this program does.
 Explain, in your own words, the following programming constructs and concepts:
 
 -	arrays
+-	elements and indicies (indexes)
 -	functions
 -	parameters and arguments
 -	return values
