@@ -1,0 +1,35 @@
+<script>
+  $(document).ready(function () {
+     $("#postbutton").click(function () {
+        $.post("/" + Cookies.get('user'), {text:  $("input").val() });
+        $("input").val("");
+     });
+     $("#logout").click(function () {
+        Cookies.remove('user');
+        window.location = "/";
+     });
+     function refreshPosts () {
+      $.getJSON("/posts.json", function (data) {
+         $("ul").empty();
+         var posts = data.posts; 
+         posts.forEach( function (val) {
+            $("ul").append("<li>" + val.user + ": " + val.text  + "</li>");
+         });
+      });
+     }
+     window.setInterval(refreshPosts, 10000);
+  });
+</script>
+
+<h1>Welcome {{user}}!</h1>
+<h2>Make a post<h2>
+  <input type="text" name="newpost" />
+  <button id="postbutton">Make post</button>
+<h2>Log out</h2>
+   <button id="logout">Log out</button>
+<h2>Posts</h2>
+<ul>
+  {{#each posts}}
+    <li> {{this.user}}: {{this.text}} </li>
+  {{/each}}
+</ul>

@@ -1,0 +1,11 @@
+<script>
+  $(document).ready(function () {
+    $("button").click(function () {
+      Cookies.set('user', $("input").val());
+      window.location = "/";
+    });
+  });
+</script>
+<h1>Log Yourself In</h1>
+<input type="text" name="login" />
+<button>Log in</button>
