@@ -21,13 +21,17 @@
 
 9. *Bonus Challenge*: Modify your functions `whoHasKey` and `whoHasVal` to return a list of _all_ people matching the key or value, respectively.
 
-## JSON transmission
+## Arrays vs. Objects
 
-1. Use `JSON.stringify()` to convert your table object (and all its people) to a JSON string.  Then have one person per group post that string in a snippet on Slack.
+Discuss with your team the difference between arrays and ordinary objects with respect to each of the following:
 
-2. Everyone: collect the JSON strings from all four groups and put them together into a single array, representing four tables.
+* How they're created
 
-3. Use your `whoHasVal(table,val)` function to find the name of someone _at another table_ who has a property with a value of your choice.
+* How literal notation is used to include contents
+
+* The _length_ property
+
+* Built-in methods
 
 ## Properties vs. Variables
 
@@ -45,49 +49,53 @@ Discuss with your team the difference between variables and properties in each o
 
 * Constraints on what they may be named
 
----
+## JSON transmission
 
-## Testing and Simulating Arrays
+1. Use `JSON.stringify()` to convert your table object (and all its people) to a JSON string.  Then have one person per group post that string in a snippet on Slack.
 
-Write some code to verify that Arrays behave as advertised.  Specifically, write three different functions, each testing one method of Arrays:
+2. Everyone: collect the JSON strings from all four groups and put them together into a single array, representing four tables.
 
-* `testPush(array)` should verify that `array.push(val)` adds _val_ to the end of _array_ and returns its new length;
-
-* `testPop(array)` should verify that `array.pop()` removes and returns the last element of _array_;
-
-* `testJoin(array)` should verify that `array.join(delim)` concatenates all elements of _array_ into a single string, with string _delim_ inserted between each element.
-
-
-Each function should do several tests:  adding, removing, or joining values under various conditions to ensure that _array_ produces the correct outcome.  Each outcome may require multiple assertions to verify.  For each function, make sure one test is for how an empty array behaves.
-Any assertion which fails should log a message to the console, but your test functions don't need return values.
-
-More detailed instructions are in the [template file](array-test-template.js).
-
-**b)** Now that you have a testing suite, implement your own version of Arrays!
-
-Create a pseudo-array, an ordinary object which is not an actual Array but behaves
-(somewhat) like one.  You may use a global variable _array_ to store
-your pseudo-array.
-It will have a property _length_, which is initially zero but needs to be adjusted as elements are added or removed.
-The elements of _array_ will be stored as properties named by their index numbers.
-So for example, an _array_ representing `[5,9]` would have three properties named "length", "0", and "1" whose values are 2, 5, and 9.
-
-For this exercise, you don't need to delete any _array_ elements beyond its length if the length shrinks; just ignore them.  Setting _array.length_ to 0 is enough to reset it to "empty".
-
-In addition to property _length_ and the element properties, give _array_ three more properties _pop_, _push_, and
-_join_ which are functions (i.e. methods) behaving exactly like (and returning the same values as) the
-corresponding methods of real Arrays.  When your _pop_ and _push_ methods modify the array, _length_ should change accordingly.
-
-You may use the enclosed [template file](pseudo-array-template.js) to get started.
-
-_Hint:_ Within each method, use the keyword `this` to refer to your array object.
-
-**c)**  Test your pseudo-array implementation using your tests from part **a)**.  Your pseudo-array should be able to pass the same tests of push, pop, and join as a real Array.
+3. Use your `whoHasVal(table,val)` function to find the name of someone _at another table_ who has a property with a value of your choice.
 
 ---
+
+
+## References
+
+1. How many objects remain after the following code runs?
+
+```
+var a={};
+var b=a;
+var c={a:a,b:b};
+a.c = c;
+var d=c.a;
+delete c.a;
+delete c.b;
+a = null;
+c = null;
+```
+
+## Circularity
+
+1.  Draw the data structure built by the following code:
+
+```
+var loop1;
+var loop2;
+loop1 = {link : loop2};
+loop2 = {link : loop1};
+loop1.link.link
+```
+
+2.  Modify the code to produce two mutually-linked objects.
+
+---
+
+
+# Objects as Dictionaries
 
 ## Comparing and Copying Objects
-
 
 Write a function `copy(obj)`, which duplicates an object (not just copying a reference to it).  You only need a _shallow_ copy, duplicating only the top level of properties.  That is, if `obj` contains another object _inner_, the duplicate may share a reference to _inner_ rather than copying all of _inner_ too.
 
@@ -121,5 +129,98 @@ Using those definitions, implement a function for each:
 
 Each function should return a new object, or _undefined_ if either of their arguments is not an object.
 
+
+
+## Data Structure Example: Chores!
+
+Below is a toy data-structure which uses "dictionary" objects to represent a relationship between two sets: which family members are responsible for which household chores.
+
+The information in the data structure can be depicted as a grid:
+```
+     | mom   dad   sally billy
+-----+------------------------
+wash | X                 X
+dry  |       X     X     X
+cook |       X     X
+mop  | X     X
+```
+
+
+Each row and column of the grid is encoded as a "dictionary" object, whose keys are the names of the objects in that row or column,
+and whose values are the objects with those names.
+
+Here is some code which builds the objects:
+```
+// people
+var mom  = {name:'mom',  jobs:{}},
+	dad  = {name:'dad',  jobs:{}},
+	billy= {name:'billy',jobs:{}},
+	sally= {name:'sally',jobs:{}};
+
+// chores
+var wash=	{job:'wash',who:{}},
+	dry =	{job:'dry', who:{}},
+	mop =	{job:'mop', who:{}},
+	cook=	{job:'cook',who:{}};
+
+var people = {
+	mom:mom,
+	dad:dad,
+	billy:billy,
+	sally:sally
+};
+
+var jobs = {
+	mop:mop,
+	cook:cook,
+	wash:wash,
+	dry:dry
+};
+
+wash.who = {mom:mom,billy:billy};
+dry.who  = {dad:dad,billy:billy,sally:sally};
+cook.who = {dad:dad,sally:sally};
+mop.who  = {dad:dad,mom:mom};
+
+mom.jobs  = {wash:wash,mop:mop};
+dad.jobs  = {dry:dry,cook:cook,mop:mop};
+sally.jobs= {dry:dry,cook:cook};
+billy.jobs= {wash:wash,dry:dry};
+```
+
+In all of the challenges below, your code should remain as generic as possible, able to work with *any* similar table of people and jobs.  Therefore your code should not contain any reference to particular people or particular jobs.  You may refer to the variables `people` and `jobs` but not the variables for individual person and chore objects (`mom`, `dry`, etc).
+<!--It may use fixed property names like 'job','who','name'.-->
+
+
+1. As well as you can, in collaboration with your team, sketch all the objects involved in the structure and the connections between them.  
+
+2. Write a function `hasJob(personName,jobName)` returning true or false.
+Here's an example of how it would be used:
+
+```
+hasJob('mom','mop') --> true
+hasJob('mom','dry') --> false
+```
+
+3. Now write a variant, `hasJob(personObj,jobObj)`, which receives objects instead of strings:
+
+```
+hasJob(mom,mop) --> true
+hasJob(mom,dry) --> false
+```
+
+4. Write a function `peopleDoing(job)` which returns an array of people-objects. Allow parameter `job` to be either an object or a job name.
+
+```
+peopleDoing(mop)  // --> [mom, dad]
+peopleDoing('mop')// --> [mom, dad]
+```
+
+5. Write a function `jobsDoneBy(person)` which returns an array of job-objects.  Allow parameter `person` to be either an object or a person's name.
+
+```
+jobsDoneBy(mom)  // --> [wash, mop] or [mop, wash]
+jobsDoneBy('mom')// --> [wash, mop] or [mop, wash]
+```
 
 
