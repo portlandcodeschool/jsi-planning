@@ -32,7 +32,6 @@ router.get('/user/:name', function(req, res) {
 router.post('/:user', function(req, res) {
   var text = req.body.text;
   var user = req.params.user;
-  console.log(req.app.locals);
   req.app.locals.posts.unshift({ user: user, text: text});
 });
 
