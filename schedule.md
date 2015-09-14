@@ -171,6 +171,12 @@ This week is the introduction to Node: modules, asynchrony, and working with the
 
 Here, we get into the client. Topics will include the DOM, jQuery, REST, AJAX, APIs, promises, and testing in the browser. The project for the week will be some sort of display thing for information from the Treehouse API, possibly including a course suggester. Clearly, this needs to be fleshed out.
 
+Exercises: Treehouse recommender;
+Memory game?,
+Code wars,
+Foursquare
+
+
 ##Week 5
 Labor Day break!
 
