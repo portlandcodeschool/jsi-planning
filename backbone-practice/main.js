@@ -1,9 +1,13 @@
-var users = new UserCollection([{username:'dan'},{username:'tom'},{username:'shackleton'}]);
-
-var issues = new IssueCollection([
-	{title:'test', description:'Do all the things', creator:'dan'},
-	{title:'kat fud', description:'', creator:'shackleton'}
+var users = new UserCollection([
+	{username:'Dan'},
+	{username:'Tom'},
+	{username:'Shackleton'}
 ]);
 
-//var dan = users.findWhere({username:'dan'});
-var mainView = new LoginView({collection:users});
+var issues = new IssueCollection([
+	{title:'Do some work', description:'Finish all the things', creator:'Dan'},
+	{title:'go kat fud stor', description:'', creator:'Shackleton'}
+]);
+
+var app = new Router({users:users, issues:issues});
+Backbone.history.start();

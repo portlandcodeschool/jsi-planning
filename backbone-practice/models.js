@@ -1,8 +1,8 @@
 var UserModel = Backbone.Model.extend({
 	defaults: {
 		username:'',
-		creations:[],
-		assignments:[]
+		//creations:[],
+		//assignments:[]
 	}
 })
 
@@ -25,6 +25,7 @@ var IssueModel = Backbone.Model.extend({
 	}
 })
 
+/*
 var ActionModel = Backbone.Model.extend({
 	defaults: {
 		issueCID:undefined,
@@ -34,6 +35,7 @@ var ActionModel = Backbone.Model.extend({
 		}
 	}
 })
+*/
 
 var UserCollection = Backbone.Collection.extend({
 	model:UserModel
@@ -43,6 +45,8 @@ var IssueCollection = Backbone.Collection.extend({
 	model:IssueModel
 })
 
+/*
 var ActionCollection = Backbone.Collection.extend({
 	action:ActionModel
 })
+*/

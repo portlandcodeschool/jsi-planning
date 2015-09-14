@@ -6,21 +6,28 @@ function useMustacheTemplates() {
 }
 useMustacheTemplates();
 
+var Router = (function(){
 
-var statusValues =   ['unassigned','assigned','in progress','done'];
+var statusValues =   ['unassigned','claimed','in progress','done'];
 
 function makeOption(opt) {
 	return '<option>'+opt+'</option>'
 };
-function makeOptions() {
+function makeUserOptions(coll) {
+	var usernames = coll.pluck('username');
+	usernames.unshift('');
+	return usernames.reduce(function(all,next){
+		return all+makeOption(next);
+	},'');
+}
+function makeStatusOptions() {
 	return statusValues.reduce(function(all,next){
 		return all+makeOption(next);
 	},'');
 }
 function normalizeStatus(status) {
-	return status.replace(/ /g,'');
+	return status.replace(/ +/g,''); //omit spaces
 }
-//var lastView = null;
 
 var IssueView = Backbone.View.extend({
 	tagName: 'li',
@@ -28,22 +35,20 @@ var IssueView = Backbone.View.extend({
 	template: _.template(
 		 '<div><span class="issueTitle">{{title}}</span><span class="issueCreator"><em>Creator: </em>{{creator}}</span></div>'
 		+'<div>{{description}}</div>'
-		+'<select class="issueStatus" value="{{status}}">'+makeOptions()+'</select>'
+		+'<select class="issueStatus" value="{{status}}">'+makeStatusOptions()+'</select>'
 		+'{[if (assignee)]}<span class="issueAssignee"><em>Assigned to: </em>{{assignee}}</span>'
 	),
 	events: {
 		'change .issueStatus': 'changeStatus'
 	},
-	//status_template: _.template('')
 	initialize: function(opts) {
 		this.user = opts.user;
-		//this.listenTo(this.model,'change',this.render);
+		//this.listenTo(this.model,'change',this.render); //not needed; all views will be remade
 		this.render();
 	},
 	render: function() {
 		this.$el.html(this.template(this.model.attributes));
 		$('select',this.$el).val(this.model.get('status'));// shouldn't be needed, but...
-		//lastView = this;
 		this.showStatus(this.model);
 	},
 	changeStatus: function(evt) {
@@ -59,63 +64,89 @@ var IssueView = Backbone.View.extend({
 	}
 })
 
+var IssueListView = Backbone.View.extend({
+	//className:'issueList',
+	template: _.template(
+		'<div class="issueList"><span class="issueListHeader">{{header}}</span>'+
+		'<ul></ul>{{footer}}</div>'	
+	),
+	initialize: function(opts) {
+		//console.log(this.el);
+		this.username = this.model.get('username');
+		this.listenTo(this.collection,'add',this.render);
+		this.listenTo(this.collection,'change',this.render);
+		this.render();
+	},
+	render: function() {
+		var username  = this.model.get('username');
+		this.$el.html(this.template(this.dataObj));
+		var $ul = $("ul",this.$el);
+		this.filterCollection().forEach(function(model){
+			var subview = new IssueView({model:model, user:username});
+			$ul.append(subview.$el);
+		})
+	}
+})
+
+var UnassignedIssuesView = IssueListView.extend({
+	el:'#unassignedIssues',
+	dataObj:{
+		header:'Available Tasks:',
+		footer:'<button id="createIssue">Create New Task</button>'
+	},
+	events: {
+		'click #createIssue': 'createIssue'
+	},
+	filterCollection: function() {
+		var username = this.username;
+		return this.collection.where({status:'unassigned'});
+	},
+	createIssue: function() {
+		new CreateIssueView({model:this.model, collection:this.collection})
+	},
+})
+
+var UserIssuesView = IssueListView.extend({
+	el:'#myIssues',
+	dataObj:{
+		header:'My Tasks:',
+		footer:''
+	},
+	
+	filterCollection: function() {
+		var username = this.username;
+		return this.collection.filter(function(model){
+			return (model.get('creator')===username ||
+					model.get('assignee')===username)
+		})
+	}
+})
+
 var UserView = Backbone.View.extend({
-	//el:'#app',
-	className:'userView', 
-	header_template: _.template(
-		'<div class="userHeader">Welcome, <span class="username">{{username}}</span>!<button id="logout">Log Out</button></div>'
-	),
-	unassigned_template: _.template(
-		 '<div class="issuePanel">All Unassigned Issues:'
-		+'<ul class="issueList unassigned"></ul>'
-		+'<button class="createIssue">Create Issue</button></div>'
-	),
-	myjobs_template: _.template(
-		'<div class="issuePanel">My Issues:'
-		+'<ul class="issueList mine"></ul></div>'
+	className: 'userView',
+	template: _.template(
+		'<div class="userHeader">Welcome, <span class="username">{{username}}</span>!<button id="logout">Log Out</button></div>'+
+		'<div id="unassignedIssues"></div>'+
+		'<div id="myIssues"></div>'
 	),
 	events: {
-		'click .createIssue': 'addIssue',
 		'click #logout': 'logout'
 	},
 	initialize: function() {
-		//this.$el.addClass('userView');
-		this.listenTo(this.collection,'add',this.redraw);
-		this.listenTo(this.collection,'change',this.redraw);
-		this.redraw();
+		//this.username = this.model.get('username');
+		if (app.currentView)
+			app.currentView.remove();
 		this.$el.appendTo('#app');
+		this.render();
 	},
-	redraw: function() {
-		//console.log('redrawing...');
-		var username = this.model.get('username');
-		this.$el.html(this.header_template({username:username})
-					 +this.unassigned_template()
-					 +this.myjobs_template());
-		var unassignedIssues = this.collection.where({status:'unassigned'}),
-			myIssues = this.collection.models.filter(function(model){
-				return model.get('assignee')===username
-					|| model.get('creator')===username;
-			});
-		//console.log(myIssues);
-		var $unassignedIssues = $('.unassigned.issueList',this.$el);
-		$unassignedIssues.html('');
-		unassignedIssues.forEach(function(model) {
-			var subview = new IssueView({model:model, user:username});
-			$unassignedIssues.append(subview.$el);
-		});
-		var $myIssues = $('.mine.issueList',this.$el);
-		$myIssues.html('');
-		myIssues.forEach(function(model) {
-			var subview = new IssueView({model:model, user:username});
-			$myIssues.append(subview.$el);
-		});
-	},
-	addIssue: function() {
-		new CreateIssueView({model:this.model, collection:this.collection})
+	render: function() {
+		this.$el.html(this.template(this.model.attributes));
+		var miniMe = _.pick(this,'model','collection');
+		new UserIssuesView(miniMe);
+		new UnassignedIssuesView(miniMe);
 	},
 	logout: function() {
-		new LoginView({collection:users});
-		this.remove();
+		app.navigate('login',{trigger:true});
 	}
 })
 
@@ -153,32 +184,75 @@ var CreateIssueView = Backbone.View.extend({
 })
 
 
-function makeUserOptions(coll) {
-	var usernames = coll.pluck('username');
-	usernames.unshift('select');
-	return usernames.reduce(function(all,next){
-		return all+makeOption(next);
-	},'');
-}
+
 
 var LoginView = Backbone.View.extend({
 	template: _.template(
-		'Please log in by selecting your username:'
-		+'<select id="userList" value="select">{{users}}</select>'
+		'Please log in by selecting your name: '+
+		'<select id="userList" value="select">{{users}}</select>'+
+		'<br>or register a new name:<br>'+
+		'<input type="text" id="registerName">'+
+		'<button id="registerBtn">Register</button>'+
+		'<br>{{message}}'
 	),
 	events: {
-		'change #userList': 'login'
+		'change #userList': 'login',
+		'click #registerBtn': 'register'
 	},
 	initialize: function() {
+		if (app.currentView)
+			app.currentView.remove();
 		this.render();
 	},
-	render: function() {
-		this.$el.html(this.template({users:makeUserOptions(this.collection)}))
-			.appendTo('#app');
+	render: function(msg) {
+		this.$el.html(this.template({
+			users:makeUserOptions(this.collection),
+			message:(msg || '')
+		})).appendTo('#app');
 	},
 	login: function(evt) {
-		var userModel = users.findWhere({username:evt.target.value});
-		new UserView({collection:issues, model: userModel});
-		this.remove();
+		//var userModel = users.findWhere({username:evt.target.value});
+		//new UserView({collection:issues, model: userModel});
+		//this.remove();
+		//app.navigate("users/"+evt.target.value,{trigger:true});
+		app.showUser(evt.target.value);
+	},
+	register: function() {
+		var name = $('#registerName').val();
+		if (name) {
+			var found = this.collection.findWhere({username:name});
+			if (!found) {
+				this.collection.add({username:name});
+				app.showUser(name);
+			} else {
+				this.render('That username already exists!');
+			}
+		}
 	}
 })
+
+var Router = Backbone.Router.extend({
+	routes: {
+		'': 'login',
+		'login':'login',
+		'users/:name': 'showUser'
+	},
+	initialize: function(opts) {
+		this.currentView = null;
+		this.users = opts.users;
+		this.issues= opts.issues;
+	},
+	login: function() {
+		app.navigate('login');
+		this.currentView = new LoginView({collection:this.users});
+	},
+	showUser: function(name) {
+		//console.log('showUser')
+		app.navigate("users/"+name);
+		var userModel = this.users.findWhere({username:name});
+		this.currentView = new UserView({collection:this.issues, model:userModel});
+	}
+})
+
+return Router;
+}())
