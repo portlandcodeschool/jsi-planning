@@ -1,8 +1,6 @@
 var UserModel = Backbone.Model.extend({
 	defaults: {
-		username:'',
-		//creations:[],
-		//assignments:[]
+		username:''
 	}
 })
 
@@ -12,8 +10,7 @@ var IssueModel = Backbone.Model.extend({
 		description:'',
 		creator:'',
 		assignee:'',
-		status:'unassigned',
-		//actions:[]
+		status:'unassigned'
 	},
 	update: function(status,username) {
 		if (status==='unassigned')
@@ -22,31 +19,20 @@ var IssueModel = Backbone.Model.extend({
 			status:status,
 			assignee:username
 		});
+		this.save();
+	},
+	editableBy: function(username) {
+		return (this.get('assignee') === username ||
+				this.get('status') === 'unassigned');
 	}
 })
-
-/*
-var ActionModel = Backbone.Model.extend({
-	defaults: {
-		issueCID:undefined,
-		status:'',
-		time: function() {
-			return new Date();
-		}
-	}
-})
-*/
 
 var UserCollection = Backbone.Collection.extend({
+	url:'/users',
 	model:UserModel
 })
 
 var IssueCollection = Backbone.Collection.extend({
+	url:'/issues',
 	model:IssueModel
 })
-
-/*
-var ActionCollection = Backbone.Collection.extend({
-	action:ActionModel
-})
-*/

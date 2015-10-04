@@ -48,7 +48,9 @@ var IssueView = Backbone.View.extend({
 	},
 	render: function() {
 		this.$el.html(this.template(this.model.attributes));
-		$('select',this.$el).val(this.model.get('status'));// shouldn't be needed, but...
+		if (!this.model.editableBy(this.user))
+			this.$('.issueStatus').attr('disabled',true);
+		$('select',this.$el).val(this.model.get('status'));
 		this.showStatus(this.model);
 	},
 	changeStatus: function(evt) {
@@ -132,7 +134,8 @@ var UserView = Backbone.View.extend({
 	events: {
 		'click #logout': 'logout'
 	},
-	initialize: function() {
+	initialize: function(opts) {
+		//this.listenTo(opts.users,)
 		//this.username = this.model.get('username');
 		if (app.currentView)
 			app.currentView.remove();
@@ -175,7 +178,7 @@ var CreateIssueView = Backbone.View.extend({
 			desc = $('#newDesc',this.$el).val(),
 			creator = this.model.get('username');
 		if (title)
-			this.collection.add({title:title,description:desc,creator:creator});
+			this.collection.create({title:title,description:desc,creator:creator});
 		this.remove();
 	},
 	cancel: function() {
@@ -200,6 +203,7 @@ var LoginView = Backbone.View.extend({
 		'click #registerBtn': 'register'
 	},
 	initialize: function() {
+		this.listenTo(this.collection,"update",this.render);
 		if (app.currentView)
 			app.currentView.remove();
 		this.render();
@@ -207,7 +211,7 @@ var LoginView = Backbone.View.extend({
 	render: function(msg) {
 		this.$el.html(this.template({
 			users:makeUserOptions(this.collection),
-			message:(msg || '')
+			message:(((typeof msg === 'string') && msg) || '')
 		})).appendTo('#app');
 	},
 	login: function(evt) {
@@ -222,7 +226,7 @@ var LoginView = Backbone.View.extend({
 		if (name) {
 			var found = this.collection.findWhere({username:name});
 			if (!found) {
-				this.collection.add({username:name});
+				this.collection.create({username:name});
 				app.showUser(name);
 			} else {
 				this.render('That username already exists!');
@@ -247,7 +251,6 @@ var Router = Backbone.Router.extend({
 		this.currentView = new LoginView({collection:this.users});
 	},
 	showUser: function(name) {
-		//console.log('showUser')
 		app.navigate("users/"+name);
 		var userModel = this.users.findWhere({username:name});
 		this.currentView = new UserView({collection:this.issues, model:userModel});

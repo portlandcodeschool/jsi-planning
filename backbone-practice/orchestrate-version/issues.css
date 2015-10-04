@@ -1,0 +1,93 @@
+.userView {
+	display:inline-block;
+	padding:15px;
+}
+.username {
+	font-weight: bold;
+}
+.userHeader {
+	font-size:larger;
+	margin:10px;
+	padding:10px;
+}
+.issueListHeader {
+	font-size: larger;
+}
+.issueList {
+	border:1px dotted black;
+	padding:10px;
+	margin:10px;
+	display:block;
+}
+
+.issueList ul {
+	padding:5px;
+    list-style-type: none;
+}
+
+.issue {
+	min-width:250px;
+	border:1px solid black;
+    padding:10px;
+    margin:5px;
+    position:relative;
+}
+
+.issue.unassigned {
+	background-color:#ffeeee;
+}
+.issue.claimed {
+	background-color:#eeeeff;
+}
+.issue.inprogress {
+	background-color:#ffffdd;
+}
+.issue.done {
+	background-color:#eeffee;
+}
+.issue.done::after {
+	right:-25px;
+	bottom:10px;
+	position:absolute;
+	display:inline;
+	font-size:xx-large;
+	content:"\2713";
+}
+
+
+.issueTitle {
+	font-size:larger;
+	font-weight:bold;
+	margin-right:10px;
+}
+
+.issueCreator {
+	float:right
+}
+
+.issueAssignee {
+	float:right;
+	fnt-style: italic;
+}
+
+
+.newIssueForm {
+	top:20%;
+	left:20%;
+	position:absolute;
+	z-index:10;
+	border: 1px solid black;
+	background-color:#ffffff;
+	box-shadow:-5px -5px 10px rgba(100, 100, 100, 0.5);;
+	padding:20px;
+}
+
+button {
+	/*display:inline-block;*/
+	padding:5px;
+	margin:auto;
+}
+
+button#logout {
+	float:right;
+}
