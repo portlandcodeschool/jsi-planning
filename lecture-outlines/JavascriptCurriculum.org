@@ -10,11 +10,11 @@ There's a few things in this file for trying to figure out the total curriculum 
      * least limited schedule (8 * 5 * 4 = 160 hours roughly)
        * immersion course, half of the time is assumed lecture and half practice
 
-How can we handle all of this? I'd argue that something akin to having "optional sections" or advanced sections. So for the purposes of figuring out what to do we could have something akin to :core:, :advanced:, and :optional: as tags. The :core: topics are going to be the things that are absolutely necessary to have a comprehensive notion of  
+How can we handle all of this? I'd argue that something akin to having "optional sections" or advanced sections. So for the purposes of figuring out what to do we could have something akin to :core:, :advanced:, and :optional: as tags. The :core: topics are going to be the things that are absolutely necessary to have a comprehensive notion of how to write useful things in javascript, :advanced: will be things more suitable to a longer course than just the evening course, and :optional: will be things mostly suited to filling gaps in the immersion course.
 
 * Giant Curriculum Outline of Doom
 ** Fundamentals of Programming
-*** What Is Programming?
+*** What Is Programming?					       :core:
 **** Formal Languages
      1. Cooking
      2. Driving
@@ -41,7 +41,7 @@ How can we handle all of this? I'd argue that something akin to having "optional
      2. Computation is something that can be studied in and of itself
      3. Computation has fundamental limits
 	1. You're unlikely to hit them unless you're very ambitious
-*** Programming Constructs
+*** Programming Constructs					       :core:
 **** Instructions in General
 ***** Instructions have specialized languages
 ****** Broil, sautee, roast, dice, julienne
@@ -148,9 +148,9 @@ Similarly, variables can point to different things over the life of a program bu
 ******** Counters
 ******** Parsers
 ****** Factories
-****** "Iffe"
+****** "Iffe"s
 ** Advanced Programming
-*** Testing
+*** Testing							       :core:
 **** Why Test?
 ***** Any large program is hard to understand
 ***** Testing gives confidence
@@ -160,9 +160,10 @@ Similarly, variables can point to different things over the life of a program bu
 ****** Need to know what breaks and when
 ****** When a test fails it should be obvious where it went wrong
 ***** Unit testing doesn't ensure correctness
-****** Need to know your tests cover a lot of possibilities
+****** Need to know your tests cover a lot of possibilities	       :core:
 *** Inheritance
-**** Prototypes
+**** Prototypes							       :core:
+**** Object Oriented Programming
 ** Programming the Browser
 *** The DOM
 **** Abstract Interface to Web Page
@@ -284,6 +285,10 @@ Similarly, variables can point to different things over the life of a program bu
 	    + for *templates*
        	
 *** Building Applications
+*** Defining an API						       :core:
+**** What data do you want to expose?
+**** Choosing your URLs
+*** Authentication
 ** Full Applications
 *** Backbone
 **** MV(C) as Organization Tool
@@ -330,4 +335,4 @@ Similarly, variables can point to different things over the life of a program bu
 ****** Documents
 ***** Orchestrate
 ***** MongoDB
-
+*** Web sockets							   :optional:
