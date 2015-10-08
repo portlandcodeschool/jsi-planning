@@ -42,60 +42,113 @@ How can we handle all of this? I'd argue that something akin to having "optional
      3. Computation has fundamental limits
 	1. You're unlikely to hit them unless you're very ambitious
 *** Programming Constructs
-**** Nouns and Verbs
+**** Instructions in General
+***** Instructions have specialized languages
+****** Broil, sautee, roast, dice, julienne
+****** Knit, pearl, drop stitch, granny squares
+**** Nouns and Verbs for Programming
 ***** Nouns Are Data
       "Data" means all the things that you manipulate in a program. There are many different kinds of data in any programming language and, generally, facilities for you to define your own kinds of data.
 ***** Verbs Are Operations
       Any programming language has syntax that is for manipulating the data. Some "verbs" are general, such as the ability to repeat an action. Some verbs are specific to kinds of data, the same way that knit and pearl only make sense with knitting and not, say, with baking.
-**** Basic Nouns
+**** Basic data
+***** Preliminary: IO
+****** console.log prints things out
+****** Used for debugging and for demonstrating code that doesn't have a graphical interface
+****** We'll also use this as a base operation in JavaScript for bootstrapping our examples
 ***** Numbers
-****** Integers
-****** Floats
-***** Strings
-****** Strings Are Text
-****** Text as Communication
-****** Two Different Syntaxes
-***** Booleans
-****** True and False
-       There are only two values of Booleans: ~true~ and ~false~, representing the idea that 
-****** Useful for making decisions
-****** Truthyness and Falsyness
-***** Functions
-****** Functions as instructions
-****** Creating functions
-****** Using functions
-****** Function scope
-***** Arrays
-****** Lists of things
-****** Collections of things
-****** Ordered collections
-***** Objects
-****** Collections without order
-****** Collections with labels
-****** Coallating data together by function
-****** Tiny machines
-**** Basic Verbs
-***** Choices
-****** If statements
-******* Syntax
-******* Semantics
-****** Case
-******* Syntax
-******* Semantics
-***** Iteration
-****** For Loops
-******* For loops as "repeat this operation"
-******* Syntax
-******* Semantics
-****** While Loops
-******* While loops as "do this until something changes"
-******* Syntax
-******* Semantics
-***** Storage
+****** As nouns
+******* Integers
+******* Floating point numbers
+******* NaN
+******* Infinity
+****** Verbs for numbers
+******* Arithmetic operations
+******** multiplication
+******** addition
+******** division
+***** Variables
+****** Variables as pronouns
+       A variable fundamentally functions as a pronoun, a way to reference something else. Much like a pronoun, variables in a programming language /point/ to another thing and what they point to can change throughout the text. For example, in the sentence 
+#+BEGIN_QUOTE
+He handed him his present that he had asked him to get for his birthday.
+#+END_QUOTE
+Now, that's not the most clear English sentence but you can tell that there's multiple people being referred to by "he", "him", and "his". The sentence needs at least two separate people to make sense.
+
+Similarly, variables can point to different things over the life of a program but this can be just as confusing as the above sentence if you're not careful.
 ****** Variables as storage
-****** 
-***** Object Operations
-***** Array Operations
+       The function of variables in a programming language is to refer to a location in /memory/ that can be modified and accessed. The memory location is like a folder in a drawer or a trapper keeper: it can contain things and you can put stuff in it and take stuff out.
+****** Creating variables
+****** Accessing variables
+***** undefined
+***** Strings
+****** As nouns
+******* Strings Are Text
+******* Text as Communication
+******* Two Different Syntaxes
+****** Verbs for Strings
+******* Concatenation
+******* Slicing
+******* Accessing characters in a string
+***** Booleans
+****** As nouns
+******* True and False
+       	There are only two values of Booleans: ~true~ and ~false~, representing the idea that 
+******* Useful for making decisions
+******* Truthyness and Falsyness
+****** Verbs for Booleans
+******* Boolean operators
+******** Short-circuiting
+******** And
+******** Or
+******** Not
+******* Booleans (and boolean like things) are for making decisions
+******* If statements
+******** Choosing between two paths
+******** Syntax
+******** Semantics
+******** If-as-expression: the ternary operator
+******* While loops
+******** Repeating things 
+***** Functions
+****** As nouns
+******* Functions as instructions
+******* Functions as functions from math class
+****** Verbs for functions
+******* Creating functions
+******** Function scope
+******** return
+******* Anonymous vs. named functions
+******* Applying functions
+***** Arrays
+****** As nouns
+******* Lists of things
+******* Collections of things
+******* Ordered collections
+****** Verbs for arrays
+***** Objects
+****** As nouns
+******* Collections without order
+******* Collections with labels
+******* Coallating data together by function
+******* Tiny machines
+****** Verbs for objects
+******* Accessing properties with dot notation 
+******* Acessing properties with 
+******* this and self-reference
+**** Advanced notions
+***** Iteration
+****** General for loops
+****** For-in loops
+****** .forEach methods
+***** Closures
+****** Inner and outer functions
+******* Inner functions "close over" the variables defined in the outer function
+******* Closed-over variables don't disappear
+******** Counters
+******** Parsers
+****** Factories
+****** "Iffe"
 ** Advanced Programming
 *** Testing
 **** Why Test?
@@ -108,6 +161,8 @@ How can we handle all of this? I'd argue that something akin to having "optional
 ****** When a test fails it should be obvious where it went wrong
 ***** Unit testing doesn't ensure correctness
 ****** Need to know your tests cover a lot of possibilities
+*** Inheritance
+**** Prototypes
 ** Programming the Browser
 *** The DOM
 **** Abstract Interface to Web Page
@@ -235,7 +290,44 @@ How can we handle all of this? I'd argue that something akin to having "optional
 **** Models
 **** Views
 **** Events
+**** Collections of Models
+**** Collections of Views
+**** Many to One Relationships
+**** Many to Many Relationships
 *** Databases
 **** Persistence of Data
+***** Persistening data allows us to keep our applications after the server is restarted
+***** The storage of data involves tradeoffs
+****** Data sets can be massive
+******* Twitter has 500 million tweets per day
+******* Tumblr has 80 million posts per day
+****** Need compact storage and fast lookup
+******* Writing it all to a single file and compressing it is small but very slow
+******* Naive search tree implementations are fast (for simple data) but can be very large
 **** Relational Databases
+***** Relational databases are the most common persistency solution
+***** Relational databases store everything as tables
+****** tables have rows and columns
+****** the columns are the types of data
+****** the rows are "related" data
+******* e.g. a user has an ID and a name
+***** SQL is the interface to relational databases
+****** SQL is a standard with a variety of operations
+****** Individual relational databases provide subsets of the SQL standard
+****** Commands that work in one database may not work in another
+******* The common case is compatibility though
+***** Vaguely based in relational algebra
+****** Relational algebra is the idea that data can be described by how sets of connected things
+****** Relational algebra was meant to provide an abstract interface to data separate from how its stored
+****** Familiar mathematical operators can be used to manipulate the data
+****** SQL is a compromise between relational algebra's abstraction and simplicity of implementation
+***** Advantages of relational databases
+***** Disadvantages of relational databases
 **** NoSQL Databases
+***** General name for everything that rejects relational database models
+***** Several different common models of data
+****** Key-value pairs
+****** Documents
+***** Orchestrate
+***** MongoDB
+
