@@ -1,3 +1,4 @@
+* meta data
 There's a few things in this file for trying to figure out the total curriculum of the course:
   1. there's the /ideal/ curriculum
      * every topic you'd want to cover
@@ -11,6 +12,10 @@ There's a few things in this file for trying to figure out the total curriculum 
        * immersion course, half of the time is assumed lecture and half practice
 
 How can we handle all of this? I'd argue that something akin to having "optional sections" or advanced sections. So for the purposes of figuring out what to do we could have something akin to :core:, :advanced:, and :optional: as tags. The :core: topics are going to be the things that are absolutely necessary to have a comprehensive notion of how to write useful things in javascript, :advanced: will be things more suitable to a longer course than just the evening course, and :optional: will be things mostly suited to filling gaps in the immersion course.
+
+I'm also going to include suggestions for exercises as I think of them.
+
+To be clear, this isn't my proclamation of the Curriculum to Rule Them All but rather me figuring out a rough plan for what topics go in what classes as raw materials for future discussions and revisions. The point of the "optional" topics is to figure out "ideal" things that we can point students to 
 
 * Giant Curriculum Outline of Doom
 ** Fundamentals of Programming
@@ -141,29 +146,40 @@ Similarly, variables can point to different things over the life of a program bu
 ****** General for loops
 ****** For-in loops
 ****** .forEach methods
+****** Loop invariants						   :optional:
 ***** Closures
 ****** Inner and outer functions
 ******* Inner functions "close over" the variables defined in the outer function
 ******* Closed-over variables don't disappear
 ******** Counters
 ******** Parsers
+******** Memoization
 ****** Factories
 ****** "Iffe"s
 ** Advanced Programming
-*** Testing							       :core:
-**** Why Test?
+*** Testing							      
+**** Why Test?							       :core:
 ***** Any large program is hard to understand
 ***** Testing gives confidence
-***** Testing allows refactoring
-**** Unit Tests
+***** Testing allows refactoring				      
+**** Unit Tests							       :core:
 ***** Test small individual pieces of functionality
 ****** Need to know what breaks and when
 ****** When a test fails it should be obvious where it went wrong
 ***** Unit testing doesn't ensure correctness
 ****** Need to know your tests cover a lot of possibilities	       :core:
+**** Fuzz Tests							   :optional:
+**** Integration Tests						   :optional:
 *** Inheritance
 **** Prototypes							       :core:
-**** Object Oriented Programming
+***** Modifying the constructor vs. modifying the prototype
+**** Object Oriented Programming				   :advanced:
+**** Object Oriented Patterns in JavaScript			   :optional:
+**** Ad-hoc Polymorphism					   :optional:
+*** Reading code						       :core:
+**** Best case scenario: it's well documented
+**** More likely scenario: there's very little explanation for how it works
+**** Execute confusing pieces by hand
 ** Programming the Browser
 *** The DOM
 **** Abstract Interface to Web Page
@@ -176,16 +192,39 @@ Similarly, variables can point to different things over the life of a program bu
 *** Manipulating the DOM with jQuery
 **** jQuery selectors
 ***** Selection and Collection
+      + $("") is the basic selection operator
+      + whenever you make a selection you actually get a *collection* of items
 ***** ID selection
 ***** Element type selection
 ***** Class selection
 ***** Child and parent selection
 **** jQuery Event Handlers
 ***** jQuery event types
+****** Lots of events, but will cover the common cases
+****** ready
+****** keydown
+****** keypress
+****** keyup
+****** mouseenter
+****** mouseleave
+****** mouseover
+****** click
+****** change
+****** blur
+****** focus
 ***** on
+      We can turn on event handlers with the ~.on~ method. 
+      ~.on~ in its most basic form takes an event name and a callback that will be the event handler
+      http://api.jquery.com/on/ 
 ***** off
 ***** one
+      ~one~ is semantically equivalent to an ~on~ with a handler that turns the event handler ~off~ after it fires
 ***** trigger
+      ~trigger~ allows you to manually invoke an event
+**** jQuery UI
+***** slideToggle
+***** hide
+***** show
 **** AJAX
 ***** HTTP Requests
 ****** Stateless requests and REST philosophy
@@ -196,12 +235,35 @@ Similarly, variables can point to different things over the life of a program bu
 ****** Interacting with simple servers
 **** Cross Domain Requests
 ***** Why cross domain requests are hard
+      https://en.wikipedia.org/wiki/Cross-site_scripting
+      https://en.wikipedia.org/wiki/Same-origin_policy
 ***** JSONP and cross domain requests
+      https://en.wikipedia.org/wiki/JSONP
+      http://stackoverflow.com/questions/2067472/what-is-jsonp-all-about
+      The basic idea is that we can violate the same-origin policy by using the script tag.
+
+      The problem with the script tag is that it can /run/ the javascript code but there's no way for that code to intersect your program: basically,
+      it has no way to name anything in your environment and you can't name anything in it's environment. What jsonp does is give you a way to name a function
+      that should take the resultant data as an argument. This is a function in *your* code. A jsonp call takes, as a parameter, the name of your function. The called server
+      will then calculate the response to your API call and then return, as a string, a call to your function with the calculated response fed to it as arguments.
+
+      If you're not used to thinking of your code, before it's executed, as just literal strings then this might feel weird.
 ***** JSONP in jQuery
+      http://api.jquery.com/jQuery.getJSON/ 
+      In jQuery making jsonp calls is just a simple matter including the "?callback=function-name" query parameter in the URL
 ** Programming Servers
 *** Node
 **** Node as JavaScript environment
 ***** Node runtime
+      The Node runtime is based on the same engine that runs JavaScript in the Chrome browser, i.e. the [[https://en.wikipedia.org/wiki/V8_(JavaScript_engine)][V8 engine]]
+      Since JavaScript always has a notion of "events", Node uses these events to handle all interactions with the outside world.
+**** Synchronous vs. Asynchronous
+***** Multi-processing
+****** Processes
+       + a process is an instance of a program
+       + every computer can run multiple processes at once
+	 + a
+****** Threads
 **** Node as Server Building Platform
 **** Node modules
 *** Express
